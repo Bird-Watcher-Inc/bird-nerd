@@ -13,7 +13,7 @@ const authRouter = require('./rotues/auth');
 
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(cors()); 
+app.use(cors());
 
 // statically serve everything in the build folder on the route '/build'
 app.use('/build', express.static(path.join(__dirname, '../build')));

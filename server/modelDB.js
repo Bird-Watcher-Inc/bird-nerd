@@ -5,9 +5,8 @@ require('dotenv').config();
 // console.log(process.env.PASSWORD);
 
 // const URI = `mongodb+srv://${process.env.USER_NAME}:${process.env.PASSWORD}@cluster0.jbbfxwt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
-const URI = process.env.MONGO_URI
+const URI = `mongodb+srv://${process.env.USER_NAME}:${process.env.PASSWORD}@birdnerditeration.bz6dvto.mongodb.net/?retryWrites=true&w=majority&appName=BirdNerdIteration`;
 console.log(URI);
-
 mongoose
   .connect(URI, {
     // options for the connect method to parse the URI
@@ -50,7 +49,7 @@ const postSchema = new Schema({
   // username_id: {
   //   type: Schema.Types.ObjectId,
   //   ref: 'user',
-  // },                          
+  // },
   // password: { type: String, required: true },
   postContent: String,
   birdName: String,
@@ -59,7 +58,7 @@ const postSchema = new Schema({
   weatherConditions: String,
   date: String,
   time: String,
-  comments: [{ type: Schema.Types.ObjectId, ref: 'comment' }]
+  comments: [{ type: Schema.Types.ObjectId, ref: 'comment' }],
 });
 
 const User = mongoose.model('user', userSchema);
