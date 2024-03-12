@@ -37,10 +37,23 @@ module.exports = {
       template: path.resolve(__dirname, './client/index.html'),
     }),
   ],
+  // devServer: {
+  //   static: {
+  //     publicPath: '/build',
+  //     directory: path.resolve(__dirname, './build'),
+  //   },
+  // },
   devServer: {
+    host: 'localhost',
+    port: 8080,
+    hot: true, 
     static: {
-      publicPath: '/build',
-      directory: path.resolve(__dirname, './build'),
+      directory: path.resolve(__dirname, 'build')
     },
+    proxy: [{
+      context: ['/**'],
+      target: 'http://localhost:3000/',
+    },
+    ],
   },
 };

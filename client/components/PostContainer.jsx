@@ -16,7 +16,7 @@ const PostContainer = () => {
         console.log(json);
         dispatch(refresh(json));
       });
-  }, [posts]);
+  }, []);
 
   // const componentsArray = [];
   // posts.forEach((post, i) => {
