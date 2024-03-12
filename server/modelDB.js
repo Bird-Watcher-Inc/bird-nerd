@@ -5,7 +5,7 @@ require('dotenv').config();
 // console.log(process.env.PASSWORD);
 
 // const URI = `mongodb+srv://${process.env.USER_NAME}:${process.env.PASSWORD}@cluster0.jbbfxwt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
-const URI = `mongodb+srv://${process.env.USER_NAME}:${process.env.PASSWORD}@birdnerditeration.bz6dvto.mongodb.net/?retryWrites=true&w=majority&appName=BirdNerdIteration`
+const URI = process.env.MONGO_URI
 console.log(URI);
 
 mongoose

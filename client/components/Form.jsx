@@ -33,7 +33,7 @@ const Form = () => {
             const password = document.querySelector('.sign-up-password').value;
             fetch('http://localhost:3000/auth/signup', {
               method: 'POST',
-              mode: 'no-cors',
+              mode: 'cors',
               headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ const Form = () => {
             const password = document.querySelector('.sign-in-password').value;
             fetch('http://localhost:3000/auth/signin', {
               method: 'POST',
-              mode: 'no-cors',
+              mode: 'cors',
               headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
