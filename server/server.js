@@ -51,6 +51,11 @@ app.get('/display_all_posts', postController.displayAllPosts, (req, res) => {
   res.status(200).json(res.locals.data);
 });
 
+// display posts by user
+app.get('/postsByUser', postController.displayPostsByUser, (req, res) => {
+  res.status(200).json(res.locals.posts);
+});
+
 // post request to /post to create a new post;
 app.post('/newpost', postController.createNewPost, (req, res) => {
   return res.status(201).json(res.locals);
