@@ -11,7 +11,7 @@ const Post = ({ post }) => {
   }
 
   const dispatch = useDispatch();
-  console.log("post", post); 
+  // console.log("post", post); 
 
   const handleClick = () => {
     dispatch(setActivePost(post));
@@ -27,6 +27,9 @@ const Post = ({ post }) => {
       <p>Date & Time: {post.date} at {post.time}</p>
       <button onClick={()=>setDisplayModal(true)}>Edit</button>
       {displayModal && <Modal
+        username={post.username}
+        postContent={post.postContent}
+        postId = {post._id}
         handleCancel= {handleCancel}
       ></Modal>}
     </div>
