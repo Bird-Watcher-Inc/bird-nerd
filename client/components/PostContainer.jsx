@@ -8,7 +8,7 @@ const PostContainer = () => {
   const posts = useSelector((state) => state.postContainer.posts);
 
   const getPosts = () => {
-    fetch('http://localhost:3000/display_all_posts')
+    fetch('http://localhost:3000/display_all_posts', {credentials: 'include'})
       .then((results) => {
         return results.json();
       })
