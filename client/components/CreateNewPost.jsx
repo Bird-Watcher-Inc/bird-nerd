@@ -15,7 +15,7 @@ import { refresh } from '../slices/postContainerSlice';
 const CreateNewPost = () => {
   const dispatch = useDispatch();
   const createNewPostState = useSelector((state) => state.createNewPost);
-  
+
   //also defined in PostContainer but couldn't figure out how to import it properly because it is dependent on dispatch
   const getPosts = () => {
     fetch('http://localhost:3000/display_all_posts')
@@ -33,23 +33,24 @@ const CreateNewPost = () => {
   };
 
   const handleSubmit = async (e) => {
+    console.log('--------Form Submitting-------');
     e.preventDefault();
     try {
-    fetch('http://localhost:3000/newpost', {
-      method: 'POST',
-      mode: 'cors',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(createNewPostState),
-    })
-      .then((result) => result.json())
-      .then((res) => {
-        console.log(res);
-        getPosts();
+      fetch('http://localhost:3000/newpost', {
+        method: 'POST',
+        mode: 'cors',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(createNewPostState),
       })
-      .catch((err) => console.log(err));
+        .then((result) => result.json())
+        .then((res) => {
+          console.log(res);
+          getPosts();
+        })
+        .catch((err) => console.log(err));
       //old logic
       const response = await fetch('/api/newpost', {
         method: 'POST',
@@ -131,9 +132,7 @@ const CreateNewPost = () => {
           onChange={(e) => handleClientInput(updateTime, e.target.value)}
         />
       </div>
-      <button type='submit'>
-        Create Post
-      </button>
+      <button type='submit'>Create Post</button>
     </form>
   );
 };
