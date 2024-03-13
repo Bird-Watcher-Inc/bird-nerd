@@ -36,6 +36,7 @@ const createNewPostSlice = createSlice({
       state.time = action.payload;
     },
     reset: (state, action) => {
+      state.title = '';
       state.postContent = '';
       state.birdName = '';
       state.location = '';

@@ -33,7 +33,6 @@ const CreateNewPost = () => {
   };
 
   const handleSubmit = async (e) => {
-      console.log('--------Form Submitting-------');
       e.preventDefault();
     try {
       fetch('http://localhost:3000/newpost', {
@@ -47,25 +46,11 @@ const CreateNewPost = () => {
       })
         .then((result) => result.json())
         .then((res) => {
-          console.log('POST request successful in .then')
           console.log(res);
           getPosts();
+          dispatch(reset());
         })
         .catch((err) => console.log(err));
-      //old logic
-      const response = await fetch('/api/newpost', {
-        method: 'POST',
-        headers: {
-          'Content Type': 'application/json',
-        },
-        body: JSON.stringify(createNewPostState),
-      });
-      if (!response.ok) {
-        throw new Error('Failed to create new post');
-      }
-      console.log('After post in old logic')
-      alert('Created post successfully');
-      dispatch(reset());
     } catch (error) {
       console.log('Error creating post: ', error);
     }
@@ -112,7 +97,7 @@ const CreateNewPost = () => {
           className='weather-box'
           type='text'
           placeholder='What was the weather like?'
-          value={createNewPostState.weather}
+          value={createNewPostState.weatherConditions}
           onChange={(e) => handleClientInput(updateWeather, e.target.value)}
         />
       </div>
