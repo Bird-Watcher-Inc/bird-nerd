@@ -7,7 +7,7 @@ const PostContainer = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.postContainer.posts);
 
-  useEffect(() => {
+  const getPosts = () => {
     fetch('http://localhost:3000/display_all_posts', {credentials: 'include'})
       .then((results) => {
         return results.json();
@@ -16,41 +16,15 @@ const PostContainer = () => {
         console.log(json);
         dispatch(refresh(json));
       });
+  }
+
+  useEffect(() => {
+    getPosts();
   }, []);
 
-  // const componentsArray = [];
-  // posts.forEach((post, i) => {
-  //   componentsArray.push(
-  //     <Post
-  //       key={post._id}
-  //       user={post.user}
-  //       textContent={post.textContent}
-  //       datetime={post.datetime}
-  //       // TODO: add more props as necessary
-  //     />
-  //   );
-  // });
-
-  //   const componentsArray = [];
-  //   posts.forEach((post, i) => {
-  //     componentsArray.push(
-  //       <Post
-  //         key={post._id}
-  //         birdName={post.birdName}
-  //         date={post.date}
-  //         dateStamp={post.dateStamp}
-  //         location={post.location}
-  //         postContent={post.postContent}
-  //         time={post.time}
-  //         username={post.username}
-  //         weatherConditions={post.weatherConditions}
-  //       />
-  //     );
-  //   });
-
-  // return <section>{componentsArray}</section>;
   return (
     <section>
+    <button className="refreshButton" onClick={getPosts}>Refresh</button>
       {posts.map((post) => (
         <Post key={post._id} post={post} />
       ))}

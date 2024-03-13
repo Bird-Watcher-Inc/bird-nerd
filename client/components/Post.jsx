@@ -1,14 +1,3 @@
-// import React from 'react';
-
-// const Post = (props) => {
-//   return <div onClick={}>{props.textContent}</div>;
-// };
-
-// // TODO
-// create handle-post logic
-
-// export default Post;
-
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setActivePost } from '../slices/contentContainerSlice';

@@ -15,7 +15,7 @@ const app = express();
 const PORT = 3000;
 
 
-const authRouter = require('./rotues/auth');
+const authRouter = require('./routes/auth');
 
 app.set('trust proxy', 1); 
 app.use(cookieParser()); 
