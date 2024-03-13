@@ -15,7 +15,6 @@ import { refresh } from '../slices/postContainerSlice';
 const CreateNewPost = () => {
   const dispatch = useDispatch();
   const createNewPostState = useSelector((state) => state.createNewPost);
-  // const currentUser = useSelector((state) => state.app.currentUser);
 
   //also defined in PostContainer but couldn't figure out how to import it properly because it is dependent on dispatch
   const getPosts = () => {
@@ -27,45 +26,43 @@ const CreateNewPost = () => {
         console.log(json);
         dispatch(refresh(json));
       });
-  }
+  };
+
   const handleClientInput = (actionCreator, value) => {
     dispatch(actionCreator(value));
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+      e.preventDefault();
     try {
-      const response = await fetch('/api/newpost', {
+      fetch('http://localhost:3000/newpost', {
         method: 'POST',
+        mode: 'cors',
+        credentials: 'include',
         headers: {
-          'Content Type': 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(createNewPostState),
-      });
-      if (!response.ok) {
-        throw new Error('Failed to create new post');
-      }
-      alert('Created post successfully');
-      dispatch(reset());
+      })
+        .then((result) => result.json())
+        .then((res) => {
+          console.log(res);
+          getPosts();
+          dispatch(reset());
+        })
+        .catch((err) => console.log(err));
     } catch (error) {
       console.log('Error creating post: ', error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className='textarea'>
-        <textarea
-          className='textarea-box'
-          value={createNewPostState.postContent}
-          onChange={(e) => handleClientInput(updateBody, e.target.value)}
-        />
-      </div>
+    <form onSubmit={handleSubmit} className="createPostForm">
       <div className='title'>
         <input
           className='title-box'
           type='text'
-          placeholder='title'
+          placeholder='Title of your Post'
           value={createNewPostState.title}
           onChange={(e) => handleClientInput(updateTitle, e.target.value)}
         />
@@ -93,7 +90,7 @@ const CreateNewPost = () => {
           className='weather-box'
           type='text'
           placeholder='What was the weather like?'
-          value={createNewPostState.weather}
+          value={createNewPostState.weatherConditions}
           onChange={(e) => handleClientInput(updateWeather, e.target.value)}
         />
       </div>
@@ -101,7 +98,7 @@ const CreateNewPost = () => {
         <input
           className='date-box'
           type='text'
-          placeholder='Date'
+          placeholder='Date you saw the bird'
           value={createNewPostState.date}
           onChange={(e) => handleClientInput(updateDate, e.target.value)}
         />
@@ -110,47 +107,19 @@ const CreateNewPost = () => {
         <input
           className='time-box'
           type='text'
-          placeholder='Time'
+          placeholder='Time you saw the bird'
           value={createNewPostState.time}
           onChange={(e) => handleClientInput(updateTime, e.target.value)}
         />
       </div>
-      <button
-        type='submit'
-        onClick={(e) => {
-          const postContent = document.querySelector('.textarea-box').value;
-          const birdName = document.querySelector('.species-box').value;
-          const location = document.querySelector('.location-box').value;
-          const weatherConditions = document.querySelector('.weather-box').value;
-          const date = document.querySelector('.date-box').value;
-          const time = document.querySelector('.time-box').value;
-
-          const body = {
-            postContent,
-            birdName,
-            location,
-            weatherConditions,
-            date,
-            time,
-          }
-          fetch('http://localhost:3000/newpost', {
-            method:'POST',
-            mode: 'cors',
-            credentials: 'include',
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(body)
-          })
-          .then((result) => result.json())
-          .then((res) => {
-            console.log(res)
-          getPosts()})
-          .catch(err => console.log(err))
-        }}
-      >
-        Create Post{' '}
-      </button>
+      <div className='textarea'>
+        <textarea
+          className='textarea-box'
+          value={createNewPostState.postContent}
+          onChange={(e) => handleClientInput(updateBody, e.target.value)}
+        />
+      </div>
+      <button type='submit' id="createPostButton">Create Post</button>
     </form>
   );
 };

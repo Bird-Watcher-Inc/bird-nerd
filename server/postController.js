@@ -63,6 +63,7 @@ postController.createNewPost = (req, res, next) => {
 // edit existing post;
 postController.editPost = (req, res, next) => {
   const { _id, newPostContent } = req.body;
+  console.log("req from editPost controller", req.body)
 
   // if request from client missing post text error handling;
   if (newPostContent === undefined) {

@@ -27,7 +27,7 @@ app.use(cors({
 origin: ['http://localhost:3000', 'http://localhost:8080' ], 
 allowedHeaders: ['Content-Type', 'Authorization'], 
 credentials: true, 
-methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE'],
+methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
 exposedHeaders: ["set-cookie"]}));
 
 //{credentials: true, origin: 'http://localhost:8080'}
