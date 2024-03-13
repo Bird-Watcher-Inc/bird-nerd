@@ -5,8 +5,9 @@ const postController = {};
 
 // create a new post and return it back to the client;
 postController.createNewPost = (req, res, next) => {
+  const posterName = req.cookies.sessionCookie
+  // console.log("poster name", posterName)
   const {
-    username,
     postContent,
     birdName,
     location,
@@ -14,10 +15,10 @@ postController.createNewPost = (req, res, next) => {
     date,
     time,
   } = req.body;
-  console.log('body', req.body);
+  // console.log('body', req.body);
   const dateStamp = new Date().toLocaleString();
   Post.create({
-    username,
+    username: `${posterName}`,
     postContent,
     birdName,
     dateStamp,
@@ -47,6 +48,7 @@ postController.createNewPost = (req, res, next) => {
         date: date,
         time: time,
       };
+      console.log("post that was created", res.locals)
       return next();
     })
     .catch((err) => {

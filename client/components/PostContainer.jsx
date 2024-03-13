@@ -9,8 +9,10 @@ const PostContainer = () => {
   const [usernameFilter, setUsernameFilter] = useState('');
 
   const getPosts = () => {
-    fetch('http://localhost:3000/display_all_posts')
-      .then((results) => results.json())
+    fetch('http://localhost:3000/display_all_posts', {credentials: 'include'})
+      .then((results) => {
+        return results.json();
+      })
       .then((json) => {
         console.log(json);
         dispatch(refresh(json));
