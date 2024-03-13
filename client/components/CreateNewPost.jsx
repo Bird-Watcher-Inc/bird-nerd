@@ -33,8 +33,8 @@ const CreateNewPost = () => {
   };
 
   const handleSubmit = async (e) => {
-    console.log('--------Form Submitting-------');
-    e.preventDefault();
+      console.log('--------Form Submitting-------');
+      e.preventDefault();
     try {
       fetch('http://localhost:3000/newpost', {
         method: 'POST',
@@ -47,6 +47,7 @@ const CreateNewPost = () => {
       })
         .then((result) => result.json())
         .then((res) => {
+          console.log('POST request successful in .then')
           console.log(res);
           getPosts();
         })
@@ -62,6 +63,7 @@ const CreateNewPost = () => {
       if (!response.ok) {
         throw new Error('Failed to create new post');
       }
+      console.log('After post in old logic')
       alert('Created post successfully');
       dispatch(reset());
     } catch (error) {
