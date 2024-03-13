@@ -10,9 +10,10 @@ import {
   updateTitle,
   reset,
 } from '../slices/createNewPostSlice';
+import { refresh } from '../slices/postContainerSlice.js';
 
 const Modal = ( {handleCancel, postContent, username, postId} ) => {
- 
+  const dispatch = useDispatch();
   const [thisPostContent, setThisPostContent] = useState(postContent)
 
   const handleSubmit = async (e) => {
@@ -20,7 +21,7 @@ const Modal = ( {handleCancel, postContent, username, postId} ) => {
       _id: postId,
       newPostContent: thisPostContent
     }
-    // e.preventDefault();
+    e.preventDefault();
     console.log("updatedpost data", updatedPost)
     try {
       const response = await fetch('http://localhost:3000/edit_post', {
@@ -41,6 +42,19 @@ const Modal = ( {handleCancel, postContent, username, postId} ) => {
       console.log('Error editing post: ', error);
     }
     handleCancel();
+    getPosts()
+  };
+
+
+  const getPosts = () => {
+    fetch('http://localhost:3000/display_all_posts', {credentials: 'include'})
+      .then((results) => {
+        return results.json();
+      })
+      .then((json) => {
+        console.log(json);
+        dispatch(refresh(json));
+      });
   };
 
 
