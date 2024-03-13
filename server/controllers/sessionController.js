@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 
 const sessionController = {};
 
-// checks if user is logged in uses their creds
+// REEM NOTE: THIS CONTROLLER CURRENTLY DOES NOT DO ANYTHING - to be updated
 
 sessionController.isLoggedIn = (req, res, next) => {
   // needs to be improved to be more secure, maybe by logging the cookie into the DB and checking for it

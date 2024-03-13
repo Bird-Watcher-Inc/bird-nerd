@@ -38,7 +38,7 @@ app.use('/build', express.static(path.join(__dirname, '../build')));
 // serve index.html on the route '/'
 
 app.use('/auth', authRouter);
-app.get('/', sessionController.isLoggedIn, (req, res) => {
+app.get('/', (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
 });
 
@@ -47,12 +47,12 @@ app.get('/', sessionController.isLoggedIn, (req, res) => {
 // get req to find username and send it to client;
 
 // display all posts;
-app.get('/display_all_posts', sessionController.isLoggedIn, postController.displayAllPosts, (req, res) => {
+app.get('/display_all_posts', postController.displayAllPosts, (req, res) => {
   res.status(200).json(res.locals.data);
 });
 
 // post request to /post to create a new post;
-app.post('/newpost', sessionController.isLoggedIn, postController.createNewPost, (req, res) => {
+app.post('/newpost', postController.createNewPost, (req, res) => {
   return res.status(201).json(res.locals);
 });
 

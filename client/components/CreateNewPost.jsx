@@ -134,23 +134,6 @@ const CreateNewPost = () => {
           .then((res) => console.log(res))
           .catch(err => console.log(err))
         }}
-        //   fetch('http://localhost:3000/newpost', {
-        //     method: 'POST',
-        //     mode: 'cors',
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(body)})
-        //     .then((results) => {
-        //       return results.json();
-        //     })
-        //     .then((json) => {
-        //       console.log(json);
-        //     })
-        //     .catch((error) => {
-        //       console.log(error);
-        //     });
-        // }}
       >
         Create Post{' '}
       </button>
