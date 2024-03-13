@@ -186,4 +186,23 @@ postController.displayAllPosts = (req, res, next) => {
     });
 };
 
+// get all posts from a specific user, passing username as the query
+postController.displayPostsByUser = (req, res, next) => {
+  const { username } = req.query;
+  Post.find({ username: username })
+    .then((posts) => {
+      res.locals.posts = posts;
+      return next();
+    })
+    .catch((err) => {
+      console.log(err.message);
+      const error = {
+        status: 500,
+        message: 'Error fetching posts by user',
+        log: 'Error fetching posts from DB by user',
+      };
+      return next(error);
+    });
+};
+
 module.exports = postController;
