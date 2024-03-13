@@ -15,8 +15,7 @@ import { refresh } from '../slices/postContainerSlice';
 const CreateNewPost = () => {
   const dispatch = useDispatch();
   const createNewPostState = useSelector((state) => state.createNewPost);
-  // const currentUser = useSelector((state) => state.app.currentUser);
-
+  
   //also defined in PostContainer but couldn't figure out how to import it properly because it is dependent on dispatch
   const getPosts = () => {
     fetch('http://localhost:3000/display_all_posts')
@@ -27,7 +26,8 @@ const CreateNewPost = () => {
         console.log(json);
         dispatch(refresh(json));
       });
-  }
+  };
+
   const handleClientInput = (actionCreator, value) => {
     dispatch(actionCreator(value));
   };
@@ -35,6 +35,22 @@ const CreateNewPost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+    fetch('http://localhost:3000/newpost', {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(createNewPostState),
+    })
+      .then((result) => result.json())
+      .then((res) => {
+        console.log(res);
+        getPosts();
+      })
+      .catch((err) => console.log(err));
+      //old logic
       const response = await fetch('/api/newpost', {
         method: 'POST',
         headers: {
@@ -115,41 +131,8 @@ const CreateNewPost = () => {
           onChange={(e) => handleClientInput(updateTime, e.target.value)}
         />
       </div>
-      <button
-        type='submit'
-        onClick={(e) => {
-          const postContent = document.querySelector('.textarea-box').value;
-          const birdName = document.querySelector('.species-box').value;
-          const location = document.querySelector('.location-box').value;
-          const weatherConditions = document.querySelector('.weather-box').value;
-          const date = document.querySelector('.date-box').value;
-          const time = document.querySelector('.time-box').value;
-
-          const body = {
-            postContent,
-            birdName,
-            location,
-            weatherConditions,
-            date,
-            time,
-          }
-          fetch('http://localhost:3000/newpost', {
-            method:'POST',
-            mode: 'cors',
-            credentials: 'include',
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(body)
-          })
-          .then((result) => result.json())
-          .then((res) => {
-            console.log(res)
-            getPosts()})
-          .catch(err => console.log(err))
-        }}
-      >
-        Create Post{' '}
+      <button type='submit'>
+        Create Post
       </button>
     </form>
   );
