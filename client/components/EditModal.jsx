@@ -14,26 +14,13 @@ import {
 const Modal = ( {handleCancel, postContent, username, postId} ) => {
  
   const [thisPostContent, setThisPostContent] = useState(postContent)
-  
-  // const handleInput = (setterfunc, input) => {
-  //   console.log(thisPostContent)
-  //   setterfunc(input);
-  // }
-
-  // const dispatch = useDispatch();
-  // const createNewPostState = useSelector((state) => state.createNewPost);
-  // const currentUser = useSelector((state) => state.app.currentUser);
-
-  // const handleClientInput = (actionCreator, value) => {
-  //   dispatch(actionCreator(value));
-  // };
 
   const handleSubmit = async (e) => {
     const updatedPost = {
       _id: postId,
       newPostContent: thisPostContent
     }
-    e.preventDefault();
+    // e.preventDefault();
     console.log("updatedpost data", updatedPost)
     try {
       const response = await fetch('http://localhost:3000/edit_post', {
@@ -56,10 +43,6 @@ const Modal = ( {handleCancel, postContent, username, postId} ) => {
     handleCancel();
   };
 
-    // const handleSubmit = () => {
-    //   console.log(thisPostContent)
-    //   setModalOpen(false);
-    // }
 
   return(
     <div className="modalContainer">
