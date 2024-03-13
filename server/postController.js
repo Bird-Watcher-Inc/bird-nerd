@@ -16,12 +16,10 @@ postController.createNewPost = (req, res, next) => {
     time,
   } = req.body;
   // console.log('body', req.body);
-  const dateStamp = new Date().toLocaleString();
   Post.create({
     username: `${posterName}`,
     postContent,
     birdName,
-    dateStamp,
     location,
     weatherConditions,
     date,
@@ -170,7 +168,7 @@ postController.addComment = (req, res, next) => {
 // get all posts and return them back to the client;
 postController.displayAllPosts = (req, res, next) => {
   Post.find({}, null, { limit: 100 })
-    .sort({ createdAt: 1 })
+    .sort({ createdAt: -1 })
     .then((data) => {
       res.locals.data = data;
       return next();

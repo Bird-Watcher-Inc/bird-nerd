@@ -9,8 +9,12 @@ const Post = ({ post }) => {
   const handleClick = () => {
     dispatch(setActivePost(post));
   };
+   const timePosted = new Date(post.createdAt)
+   const timeFormatted = timePosted.toDateString(); 
+
   return (
     <div className='post' onClick={handleClick}>
+      <a>Time posted: {timeFormatted}</a>
       <p>User: {post.username}</p>
       <p>Bird Name: {post.birdName}</p>
       <p>Post: {post.postContent}</p>
