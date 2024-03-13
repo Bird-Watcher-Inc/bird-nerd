@@ -16,6 +16,7 @@ const PostContainer = () => {
       .then((json) => {
         console.log(json);
         dispatch(refresh(json));
+        setUsernameFilter('');
       });
   };
 
