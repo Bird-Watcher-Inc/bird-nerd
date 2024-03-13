@@ -57,19 +57,12 @@ const CreateNewPost = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className='textarea'>
-        <textarea
-          className='textarea-box'
-          value={createNewPostState.postContent}
-          onChange={(e) => handleClientInput(updateBody, e.target.value)}
-        />
-      </div>
+    <form onSubmit={handleSubmit} className="createPostForm">
       <div className='title'>
         <input
           className='title-box'
           type='text'
-          placeholder='title'
+          placeholder='Title of your Post'
           value={createNewPostState.title}
           onChange={(e) => handleClientInput(updateTitle, e.target.value)}
         />
@@ -105,7 +98,7 @@ const CreateNewPost = () => {
         <input
           className='date-box'
           type='text'
-          placeholder='Date'
+          placeholder='Date you saw the bird'
           value={createNewPostState.date}
           onChange={(e) => handleClientInput(updateDate, e.target.value)}
         />
@@ -114,12 +107,19 @@ const CreateNewPost = () => {
         <input
           className='time-box'
           type='text'
-          placeholder='Time'
+          placeholder='Time you saw the bird'
           value={createNewPostState.time}
           onChange={(e) => handleClientInput(updateTime, e.target.value)}
         />
       </div>
-      <button type='submit'>Create Post</button>
+      <div className='textarea'>
+        <textarea
+          className='textarea-box'
+          value={createNewPostState.postContent}
+          onChange={(e) => handleClientInput(updateBody, e.target.value)}
+        />
+      </div>
+      <button type='submit' id="createPostButton">Create Post</button>
     </form>
   );
 };
