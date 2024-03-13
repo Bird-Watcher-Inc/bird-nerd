@@ -145,7 +145,7 @@ const CreateNewPost = () => {
           .then((result) => result.json())
           .then((res) => {
             console.log(res)
-            getPosts()})
+          getPosts()})
           .catch(err => console.log(err))
         }}
       >
