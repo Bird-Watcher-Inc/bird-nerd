@@ -10,12 +10,24 @@ import {
   updateTitle,
   reset,
 } from '../slices/createNewPostSlice';
+import { refresh } from '../slices/postContainerSlice';
 
 const CreateNewPost = () => {
   const dispatch = useDispatch();
   const createNewPostState = useSelector((state) => state.createNewPost);
   const currentUser = useSelector((state) => state.app.currentUser);
 
+  //also defined in PostContainer but couldn't figure out how to import it properly because it is dependent on dispatch
+  const getPosts = () => {
+    fetch('http://localhost:3000/display_all_posts')
+      .then((results) => {
+        return results.json();
+      })
+      .then((json) => {
+        console.log(json);
+        dispatch(refresh(json));
+      });
+  }
   const handleClientInput = (actionCreator, value) => {
     dispatch(actionCreator(value));
   };
@@ -62,7 +74,7 @@ const CreateNewPost = () => {
         <input
           className='species-box'
           type='text'
-          placeholder='Name of the bird / Species'
+          placeholder='Bird Species'
           value={createNewPostState.birdName}
           onChange={(e) => handleClientInput(updateNameOfBird, e.target.value)}
         />
@@ -80,7 +92,7 @@ const CreateNewPost = () => {
         <input
           className='weather-box'
           type='text'
-          placeholder='What wsa the weather like?'
+          placeholder='What was the weather like?'
           value={createNewPostState.weather}
           onChange={(e) => handleClientInput(updateWeather, e.target.value)}
         />
@@ -136,6 +148,7 @@ const CreateNewPost = () => {
             })
             .then((json) => {
               console.log(json);
+              getPosts();
             })
             .catch((error) => {
               console.log(error);

@@ -9,7 +9,7 @@ const postController = require('./postController');
 const app = express();
 const PORT = 3000;
 
-const authRouter = require('./rotues/auth');
+const authRouter = require('./routes/auth');
 
 app.use(express.json());
 app.use(express.urlencoded());
