@@ -16,6 +16,7 @@ const PostContainer = () => {
       .then((json) => {
         console.log(json);
         dispatch(refresh(json));
+        setUsernameFilter('')
       });
   };
 
@@ -39,14 +40,16 @@ const PostContainer = () => {
   }, []);
 
   return (
-    <section>
-      <div>
-        <input type="text" value={usernameFilter} onChange={handleFilterChange} placeholder="Filter by username" />
-        <button onClick={filterPosts}>Filter</button>
+    <section className="postContainer">
+      <div className="postUtils">
+        <div className="filterUtils">
+          <input type="text" value={usernameFilter} onChange={handleFilterChange} placeholder="Filter by username" />
+          <button onClick={filterPosts}>Filter</button>
+        </div>
         <button className="refreshButton" onClick={getPosts}>Refresh</button>
       </div>
       {posts.map((post) => (
-        <Post key={post._id} post={post} />
+        <Post key={post._id} post={post} className="posts"/>
       ))}
     </section>
   );

@@ -4,7 +4,7 @@ import { setActivePost } from '../slices/contentContainerSlice';
 
 const Post = ({ post }) => {
   const dispatch = useDispatch();
-  console.log("post", post); 
+  // console.log("post", post); 
 
   const handleClick = () => {
     dispatch(setActivePost(post));

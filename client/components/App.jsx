@@ -10,7 +10,7 @@ const App = () => {
   const isLoggedIn = useSelector((state) => state.app.isLoggedIn);
   // return either the signin or main feed depending on whethere the user is logged in or not
   // TODO: replace these component names with whatever the frontend team names them
-  return isLoggedIn ? <MainContainer /> : <Form />;
+  // return isLoggedIn ? <MainContainer /> : <Form />;
   return <MainContainer />;
 };
 
