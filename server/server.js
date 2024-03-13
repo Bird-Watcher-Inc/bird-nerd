@@ -1,19 +1,37 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session');
 const path = require('path');
 var cors = require('cors');
 const { User, Comment, Post } = require('./modelDB');
 
 // const userController = require('./controllers/userController');
 const postController = require('./postController');
+const sessionController = require('./controllers/sessionController');
+
+
 
 const app = express();
 const PORT = 3000;
 
+
 const authRouter = require('./routes/auth');
+
+app.set('trust proxy', 1); 
+app.use(cookieParser()); 
 
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(cors());
+
+app.use(cors({ 
+origin: ['http://localhost:3000', 'http://localhost:8080' ], 
+allowedHeaders: ['Content-Type', 'Authorization'], 
+credentials: true, 
+methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE'],
+exposedHeaders: ["set-cookie"]}));
+
+//{credentials: true, origin: 'http://localhost:8080'}
+
 
 // statically serve everything in the build folder on the route '/build'
 app.use('/build', express.static(path.join(__dirname, '../build')));

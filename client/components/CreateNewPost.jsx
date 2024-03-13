@@ -15,7 +15,7 @@ import { refresh } from '../slices/postContainerSlice';
 const CreateNewPost = () => {
   const dispatch = useDispatch();
   const createNewPostState = useSelector((state) => state.createNewPost);
-  const currentUser = useSelector((state) => state.app.currentUser);
+  // const currentUser = useSelector((state) => state.app.currentUser);
 
   //also defined in PostContainer but couldn't figure out how to import it properly because it is dependent on dispatch
   const getPosts = () => {
@@ -118,41 +118,35 @@ const CreateNewPost = () => {
       <button
         type='submit'
         onClick={(e) => {
-          const username = '#1 Birder';
           const postContent = document.querySelector('.textarea-box').value;
           const birdName = document.querySelector('.species-box').value;
           const location = document.querySelector('.location-box').value;
-          const weatherConditions =
-            document.querySelector('.weather-box').value;
+          const weatherConditions = document.querySelector('.weather-box').value;
           const date = document.querySelector('.date-box').value;
           const time = document.querySelector('.time-box').value;
 
+          const body = {
+            postContent,
+            birdName,
+            location,
+            weatherConditions,
+            date,
+            time,
+          }
           fetch('http://localhost:3000/newpost', {
-            method: 'POST',
+            method:'POST',
             mode: 'cors',
+            credentials: 'include',
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-              username,
-              postContent,
-              birdName,
-              location,
-              weatherConditions,
-              date,
-              time,
-            }),
+            body: JSON.stringify(body)
           })
-            .then((results) => {
-              return results.json();
-            })
-            .then((json) => {
-              console.log(json);
-              getPosts();
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+          .then((result) => result.json())
+          .then((res) => {
+            console.log(res)
+            getPosts()})
+          .catch(err => console.log(err))
         }}
       >
         Create Post{' '}
