@@ -16,12 +16,10 @@ postController.createNewPost = (req, res, next) => {
     time,
   } = req.body;
   // console.log('body', req.body);
-  const dateStamp = new Date().toLocaleString();
   Post.create({
     username: `${posterName}`,
     postContent,
     birdName,
-    dateStamp,
     location,
     weatherConditions,
     date,
@@ -171,7 +169,7 @@ postController.addComment = (req, res, next) => {
 // get all posts and return them back to the client;
 postController.displayAllPosts = (req, res, next) => {
   Post.find({}, null, { limit: 100 })
-    .sort({ createdAt: 1 })
+    .sort({ createdAt: -1 })
     .then((data) => {
       res.locals.data = data;
       return next();
@@ -182,6 +180,26 @@ postController.displayAllPosts = (req, res, next) => {
         status: 400,
         message: 'Cannot get posts',
         log: 'Error fetching posts from DB',
+      };
+      return next(error);
+    });
+};
+
+// get all posts from a specific user, passing username as the query
+postController.displayPostsByUser = (req, res, next) => {
+  const { username } = req.query;
+  Post.find({ username: username })
+    .sort({ createdAt: -1 })
+    .then((posts) => {
+      res.locals.posts = posts;
+      return next();
+    })
+    .catch((err) => {
+      console.log(err.message);
+      const error = {
+        status: 500,
+        message: 'Error fetching posts by user',
+        log: 'Error fetching posts from DB by user',
       };
       return next(error);
     });
