@@ -5,8 +5,9 @@ const postController = {};
 
 // create a new post and return it back to the client;
 postController.createNewPost = (req, res, next) => {
+  const name = 'TEXT'
+  console.log("poster name", name,)
   const {
-    username,
     postContent,
     birdName,
     location,
@@ -17,7 +18,7 @@ postController.createNewPost = (req, res, next) => {
   console.log('body', req.body);
   const dateStamp = new Date().toLocaleString();
   Post.create({
-    username,
+    username: 'text',
     postContent,
     birdName,
     dateStamp,

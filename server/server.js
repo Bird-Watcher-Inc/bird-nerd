@@ -1,26 +1,44 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session');
 const path = require('path');
 var cors = require('cors');
 const { User, Comment, Post } = require('./modelDB');
 
 // const userController = require('./controllers/userController');
 const postController = require('./postController');
+const sessionController = require('./controllers/sessionController');
+
+
 
 const app = express();
 const PORT = 3000;
 
+
 const authRouter = require('./rotues/auth');
+
+app.set('trust proxy', 1); 
+app.use(cookieParser()); 
 
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(cors());
+
+app.use(cors({ 
+origin: ['http://localhost:3000', 'http://localhost:8080' ], 
+allowedHeaders: ['Content-Type', 'Authorization'], 
+credentials: true, 
+methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE'],
+exposedHeaders: ["set-cookie"]}));
+
+//{credentials: true, origin: 'http://localhost:8080'}
+
 
 // statically serve everything in the build folder on the route '/build'
 app.use('/build', express.static(path.join(__dirname, '../build')));
 // serve index.html on the route '/'
 
 app.use('/auth', authRouter);
-app.get('/', (req, res) => {
+app.get('/', sessionController.isLoggedIn, (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
 });
 
@@ -29,7 +47,7 @@ app.get('/', (req, res) => {
 // get req to find username and send it to client;
 
 // display all posts;
-app.get('/display_all_posts', postController.displayAllPosts, (req, res) => {
+app.get('/display_all_posts', sessionController.isLoggedIn, postController.displayAllPosts, (req, res) => {
   res.status(200).json(res.locals.data);
 });
 

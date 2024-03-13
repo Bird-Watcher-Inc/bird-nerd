@@ -51,8 +51,8 @@ module.exports = {
       directory: path.resolve(__dirname, 'build')
     },
     proxy: [{
-      context: ['/**'],
-      target: 'http://localhost:3000/',
+      context: ['/api/**'],
+      target: 'http://localhost:3000',
     },
     ],
   },

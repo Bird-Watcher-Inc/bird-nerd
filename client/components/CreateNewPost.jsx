@@ -14,7 +14,7 @@ import {
 const CreateNewPost = () => {
   const dispatch = useDispatch();
   const createNewPostState = useSelector((state) => state.createNewPost);
-  const currentUser = useSelector((state) => state.app.currentUser);
+  // const currentUser = useSelector((state) => state.app.currentUser);
 
   const handleClientInput = (actionCreator, value) => {
     dispatch(actionCreator(value));
@@ -106,12 +106,10 @@ const CreateNewPost = () => {
       <button
         type='submit'
         onClick={(e) => {
-          const username = '#1 Birder';
           const postContent = document.querySelector('.textarea-box').value;
           const birdName = document.querySelector('.species-box').value;
           const location = document.querySelector('.location-box').value;
-          const weatherConditions =
-            document.querySelector('.weather-box').value;
+          const weatherConditions = document.querySelector('.weather-box').value;
           const date = document.querySelector('.date-box').value;
           const time = document.querySelector('.time-box').value;
 
@@ -122,7 +120,6 @@ const CreateNewPost = () => {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              username,
               postContent,
               birdName,
               location,
