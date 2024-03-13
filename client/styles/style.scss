@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
 $DeepGreen: #114232;
-$GrassGreen: #87a922;
+$GrassGreen: #2c7407;
 $Yellow: #fcdc2a;
 $PaleYellow: #f9f8d1;
 
@@ -9,7 +9,8 @@ $font: "Open Sans", sans-serif;
 
 body {
   background-color: $PaleYellow;
-  margin: 0vw;
+  display: flex;
+  justify-content: center;
 }
 
 button {
@@ -27,12 +28,11 @@ button {
   }
   text-decoration: none;
   padding: 0.3vw 1.5vw;
-  border-radius: 1rem;
+  border-radius: 10px;
   margin: 1vw;
 }
 
 .form-container {
-  // background-color: $Yellow;
   font-family: $font;
   color: $DeepGreen;
   display: flex;
@@ -66,28 +66,49 @@ button {
   justify-content: center;
 }
 
-// .post {
-//   color: $Yellow;
-//   border: 1px solid black;
-// }
-
 .sign-up-text,
 .sign-in-text {
   color: $DeepGreen;
-  // border-radius: 10px;
   text-align: center;
 }
-
-.time-box,
-.date-box,
-.weather-box,
-.location-box,
-.species-box,
-.textarea-box,
-.title-box {
-  border: none;
-  margin: 1vw;
-  width: 10vw;
+.createPostForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5vw;
+  .time-box,
+  .date-box,
+  .weather-box,
+  .location-box,
+  .species-box,
+  .textarea-box,
+  .title-box {
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    width: 50vw;
+  }
+  .textarea-box{
+    height: 10vh;
+  }
+  #createPostButton{
+    width: 20vw;
+  }
+}
+.postContainer{
+  display: flex;
+  flex-direction: column;
+  .postUtils{
+    display: flex;
+    align-items: center;
+    #refreshButton{
+      margin-left: auto;
+    }
+  }
+  .posts{
+    border: solid 1px $DeepGreen;
+  }
 }
 
 .modalContainer {
