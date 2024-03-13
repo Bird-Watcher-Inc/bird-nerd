@@ -113,31 +113,44 @@ const CreateNewPost = () => {
           const date = document.querySelector('.date-box').value;
           const time = document.querySelector('.time-box').value;
 
+          const body = {
+            postContent,
+            birdName,
+            location,
+            weatherConditions,
+            date,
+            time,
+          }
           fetch('http://localhost:3000/newpost', {
-            method: 'POST',
+            method:'POST',
             mode: 'cors',
+            credentials: 'include',
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-              postContent,
-              birdName,
-              location,
-              weatherConditions,
-              date,
-              time,
-            }),
+            body: JSON.stringify(body)
           })
-            .then((results) => {
-              return results.json();
-            })
-            .then((json) => {
-              console.log(json);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+          .then((result) => result.json())
+          .then((res) => console.log(res))
+          .catch(err => console.log(err))
         }}
+        //   fetch('http://localhost:3000/newpost', {
+        //     method: 'POST',
+        //     mode: 'cors',
+        //     headers: {
+        //       'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(body)})
+        //     .then((results) => {
+        //       return results.json();
+        //     })
+        //     .then((json) => {
+        //       console.log(json);
+        //     })
+        //     .catch((error) => {
+        //       console.log(error);
+        //     });
+        // }}
       >
         Create Post{' '}
       </button>

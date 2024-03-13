@@ -52,7 +52,7 @@ app.get('/display_all_posts', sessionController.isLoggedIn, postController.displ
 });
 
 // post request to /post to create a new post;
-app.post('/newpost', postController.createNewPost, (req, res) => {
+app.post('/newpost', sessionController.isLoggedIn, postController.createNewPost, (req, res) => {
   return res.status(201).json(res.locals);
 });
 
