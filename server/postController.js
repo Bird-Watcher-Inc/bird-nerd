@@ -167,7 +167,7 @@ postController.addComment = (req, res, next) => {
 
 // get all posts and return them back to the client;
 postController.displayAllPosts = (req, res, next) => {
-  Post.find({}, null, { limit: 100 })
+  Post.find({}, null, { limit: 30 })
     .sort({ createdAt: 1 })
     .then((data) => {
       res.locals.data = data;
