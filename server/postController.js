@@ -188,6 +188,7 @@ postController.displayAllPosts = (req, res, next) => {
 postController.displayPostsByUser = (req, res, next) => {
   const { username } = req.query;
   Post.find({ username: username })
+    .sort({ createdAt: -1 })
     .then((posts) => {
       res.locals.posts = posts;
       return next();
