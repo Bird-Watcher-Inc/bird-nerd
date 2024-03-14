@@ -51,6 +51,7 @@ button {
   border: none;
   padding: 2vw;
   margin: 1vw;
+  border-radius: 20px;
 }
 
 .sign-in-password,
@@ -58,6 +59,7 @@ button {
   border: none;
   padding: 2vw;
   margin: 1vw;
+  border-radius: 20px;
 }
 
 .sign-up-wrap,
@@ -99,15 +101,20 @@ button {
 .postContainer{
   display: flex;
   flex-direction: column;
+  align-items: center;
   .postUtils{
     display: flex;
+    flex-direction: row;
     align-items: center;
     #refreshButton{
       margin-left: auto;
     }
   }
-  .posts{
-    border: solid 1px $DeepGreen;
+  .post{
+    width: 80vw;
+    border: solid 3px $DeepGreen;
+    border-radius: 20px;
+    background-color: rgb(161, 182, 120);
   }
 }
 
@@ -121,11 +128,26 @@ button {
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
+  .editModal {
+    h2{
+      margin-right: auto;
+      margin-bottom: auto;
+    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: white;
+    height: 20em;
+    width: 30em;
+    border-radius: 1rem;
+    padding: 2rem;
+    font-family: $font;
+    #editpostContent{
+      margin-top: 1rem;
+      width: 90%;
+      height: 70%;
+    }
+  }
 }
 
-.editModal {
-  background-color: white;
-  width: 30em;
-  border-radius: 1rem;
-  padding: 2rem;
-}

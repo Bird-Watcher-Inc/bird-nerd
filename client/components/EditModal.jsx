@@ -71,10 +71,12 @@ const Modal = ( {handleCancel, postContent, username, postId} ) => {
         <input id="editLocation" deafaultValue={location}></input>
         <label for="editWeather">Weather</label>
         <input id="editWeather" defaultValue={weather}></input> */}
-        <label htmlFor="editpostContent">Original Post:</label>
-        <input id="editpostContent"  defaultValue={thisPostContent} onChange={(e)=>setThisPostContent(e.target.value)}></input>
-        <button onClick={()=>handleCancel()}> cancel </button>
-        <button onClick={(e)=>handleSubmit(e)}> update </button>
+        <label htmlFor="editpostContent">Original Post: </label>
+        <textarea id="editpostContent"  defaultValue={thisPostContent} onChange={(e)=>setThisPostContent(e.target.value)}></textarea>
+        <div>
+          <button onClick={()=>handleCancel()}> Cancel </button>
+          <button onClick={(e)=>handleSubmit(e)}> Update </button>
+        </div>
       </div>
       </form>
     </div>
