@@ -57,6 +57,8 @@ const CreateNewPost = () => {
   };
 
   return (
+    <div className='postFormWrap'>
+    <p>Add a New Post</p>
     <form onSubmit={handleSubmit} className="createPostForm">
       <div className='title'>
         <input
@@ -113,14 +115,16 @@ const CreateNewPost = () => {
         />
       </div>
       <div className='textarea'>
-        <textarea
+        <input
           className='textarea-box'
+          placeholder='Include details about your sighting'
           value={createNewPostState.postContent}
           onChange={(e) => handleClientInput(updateBody, e.target.value)}
         />
       </div>
       <button type='submit' id="createPostButton">Create Post</button>
     </form>
+    </div>
   );
 };
 

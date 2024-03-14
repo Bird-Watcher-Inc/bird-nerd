@@ -31,14 +31,14 @@ const Post = ({ post }) => {
 
   return (
     <div className='post' onClick={handleClick}>
-      <a>Time posted: {datePortion} at {timePortion}</a>
-      <p>User: {post.username}</p>
-      <p>Bird Name: {post.birdName}</p>
-      <p>Post: {post.postContent}</p>
-      <p>Location: {post.location}</p>
-      <p>Weather: {post.weatherConditions}</p>
-      <p>Location: {post.location}</p>
-      <p>Date & Time: {post.date} at {post.time}</p>
+      <a><strong></strong> {datePortion} at {timePortion}</a>
+      <span className='username'><strong>{post.username}</strong></span>
+      <p><strong>Bird Name: </strong> {post.birdName}</p>
+      <p><strong>Weather: </strong>{post.weatherConditions}</p>
+      <p><strong>Location: </strong> {post.location}</p>
+      <p><strong>Time of bird sighting:</strong> {post.date} at {post.time}</p>
+      <p><strong>Details: </strong> </p>
+      <p className='postdetails'>{post.postContent}</p>
       <button onClick={()=>setDisplayModal(true)}>Edit</button>
       {displayModal && <Modal
         username={post.username}

@@ -42,11 +42,12 @@ const PostContainer = () => {
   return (
     <div className="postContainer">
       <div className="postUtils">
-        <div className="filterUtils">
-          <input type="text" value={usernameFilter} onChange={handleFilterChange} placeholder="Filter by username" />
-          <button onClick={filterPosts}>Filter</button>
-        </div>
-        <button className="refreshButton" onClick={getPosts}>Refresh</button>
+          <p>My Feed</p>
+          <div className='utilities'>
+            <input type="text" value={usernameFilter} onChange={handleFilterChange} placeholder="Filter by username" />
+            <button onClick={filterPosts}>Filter</button>
+            <button className="refreshButton" onClick={getPosts}>Refresh</button>
+          </div>
       </div>
       {posts.map((post) => (
         <Post key={post._id} post={post}/>
