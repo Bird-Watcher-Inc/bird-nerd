@@ -1,6 +1,3 @@
-
-// const appSliceReducer = require('../client/slices/appSlice.js')
-
 import appSliceReducer from '../client/slices/appSlice.js'
 
 describe('appSliceReducer', ()=>{
