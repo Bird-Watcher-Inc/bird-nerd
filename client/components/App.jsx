@@ -9,7 +9,7 @@ import style from '../styles/style.css';
 const App = () => {
   const isLoggedIn = useSelector((state) => state.app.isLoggedIn);
   // return either the signin or main feed depending on whethere the user is logged in or not
-  return isLoggedIn ? <MainContainer /> : <Form />;
+  // return isLoggedIn ? <MainContainer /> : <Form />;
   return <MainContainer />;
 };
 

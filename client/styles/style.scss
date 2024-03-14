@@ -73,12 +73,30 @@ button {
   color: $DeepGreen;
   text-align: center;
 }
+.postFormWrap {
+  font-family: $font;
+  background-color: lighten($DeepGreen, 10%); 
+  border-radius: 20px;
+  border: solid black; 
+  width: 85vw; 
+}
+.postFormWrap p{
+  font-family: $font;
+  margin-left: 35px;
+  margin-bottom: 0px;
+  font-size: larger;
+  font-weight: bold;
+  color: $PaleYellow;
+}
+
 .createPostForm{
+  padding: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 5vw;
+  margin-top: 1vw;
   .time-box,
   .date-box,
   .weather-box,
@@ -86,35 +104,84 @@ button {
   .species-box,
   .textarea-box,
   .title-box {
+    font-family: $font;
+    background-color: $PaleYellow;
+    padding: 5px;
     border: none;
     border-radius: 5px;
     margin: 5px;
-    width: 50vw;
+    width: 75vw;
   }
   .textarea-box{
+    font-family: $font;
     height: 10vh;
   }
   #createPostButton{
+    margin-top: 20px;
+    margin-bottom: 0px;
+    padding: 10px;
     width: 20vw;
   }
 }
 .postContainer{
+  margin-top: 20px;
+  background-color: transparentize($DeepGreen, 0.5); 
+  border: solid black;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   .postUtils{
+    width: 100%;
     display: flex;
-    flex-direction: row;
     align-items: center;
-    #refreshButton{
-      margin-left: auto;
+    justify-content: space-between;
+    input {
+      font-family: $font;
+      font-size: larger;
+      padding: 0.3vw 1.5vw;
+      border-radius: 10px;
+      margin: 1vw;
+    }
+    button {
+      padding: 5px;
+      width: 100px;
+    }
+    p {
+      font-family: $font;
+      margin-left: 35px;
+      font-size: larger;
+      font-weight: bold;
+      color: $PaleYellow;
     }
   }
   .post{
-    width: 80vw;
+    font-family: $font;
+    width: 75vw;
     border: solid 3px $DeepGreen;
     border-radius: 20px;
-    background-color: rgb(161, 182, 120);
+    background-color: $PaleYellow;
+    a {
+      float: right;
+    }
+    p {
+      margin: 0;
+    }
+
+    button {
+      padding: 5px;
+      width: 100px;
+      float: right;
+
+    }
+    .postdetails {
+      margin-top: 5px;
+      background-color: transparentize($DeepGreen, 0.7);
+      border-radius: 5px;
+      padding: 5px;
+      height: 10vw;
+    }
+
   }
 }
 
