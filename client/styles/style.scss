@@ -44,6 +44,18 @@ button {
 .sign-in-form,
 .sign-up-form {
   margin: 4vw;
+  // background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+  height: 200px;
+  margin-bottom: 0;
+  
+}
+
+.switch-button {
+  width: 425px;
+  margin-top: 0;
 }
 
 .sign-in-username,
@@ -64,6 +76,7 @@ button {
 
 .sign-up-wrap,
 .sign-in-wrap {
+  font-family: $font;
   display: flex;
   justify-content: center;
 }
@@ -125,7 +138,7 @@ button {
 }
 .postContainer{
   margin-top: 20px;
-  background-color: transparentize($DeepGreen, 0.5); 
+  background-color: transparentize($DeepGreen, 0.3); 
   border: solid black;
   border-radius: 20px;
   display: flex;
