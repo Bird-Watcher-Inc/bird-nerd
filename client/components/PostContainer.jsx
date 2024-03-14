@@ -40,7 +40,7 @@ const PostContainer = () => {
   }, []);
 
   return (
-    <section className="postContainer">
+    <div className="postContainer">
       <div className="postUtils">
         <div className="filterUtils">
           <input type="text" value={usernameFilter} onChange={handleFilterChange} placeholder="Filter by username" />
@@ -49,9 +49,9 @@ const PostContainer = () => {
         <button className="refreshButton" onClick={getPosts}>Refresh</button>
       </div>
       {posts.map((post) => (
-        <Post key={post._id} post={post} className="posts"/>
+        <Post key={post._id} post={post}/>
       ))}
-    </section>
+    </div>
   );
 };
 
