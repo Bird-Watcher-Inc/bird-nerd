@@ -43,6 +43,9 @@ module.exports = {
       directory: path.resolve(__dirname, './build'),
     },
   },
+  resolve: {
+    extensions: ['.js', '.jsx']
+  }
   // devServer: {
   //   host: 'localhost',
   //   port: 8080,

@@ -12,7 +12,7 @@ describe('appSliceReducer', ()=>{
     }); 
 
     it('should provide a default state for fake action', () => {
-        const result = appSliceReducer(undefined, fakeAction);
+        const result = appSliceReducer(startState, fakeAction);
         expect(result).toEqual({
             currentUser: 'myUser',
             isLoggedIn: false,
