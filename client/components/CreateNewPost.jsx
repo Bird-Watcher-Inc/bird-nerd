@@ -57,10 +57,11 @@ const CreateNewPost = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="createPostForm">
+    <form onSubmit={handleSubmit} className="createPostForm" data-testid='createPostForm'>
       <div className='title'>
         <input
           className='title-box'
+          data-testid='title-box'
           type='text'
           placeholder='Title of your Post'
           value={createNewPostState.title}
@@ -70,6 +71,7 @@ const CreateNewPost = () => {
       <div className='species'>
         <input
           className='species-box'
+          data-testid='species-box'
           type='text'
           placeholder='Bird Species'
           value={createNewPostState.birdName}
@@ -79,6 +81,7 @@ const CreateNewPost = () => {
       <div className='location'>
         <input
           className='location-box'
+          data-testid='location-box'
           type='text'
           placeholder='Where did you see this bird?'
           value={createNewPostState.location}
@@ -88,6 +91,7 @@ const CreateNewPost = () => {
       <div className='weather'>
         <input
           className='weather-box'
+          data-testid='weather-box'
           type='text'
           placeholder='What was the weather like?'
           value={createNewPostState.weatherConditions}
@@ -97,6 +101,7 @@ const CreateNewPost = () => {
       <div className='date'>
         <input
           className='date-box'
+          data-testid='date-box'
           type='text'
           placeholder='Date you saw the bird'
           value={createNewPostState.date}
@@ -106,6 +111,7 @@ const CreateNewPost = () => {
       <div className='time'>
         <input
           className='time-box'
+          data-testid='time-box'
           type='text'
           placeholder='Time you saw the bird'
           value={createNewPostState.time}
@@ -115,11 +121,12 @@ const CreateNewPost = () => {
       <div className='textarea'>
         <textarea
           className='textarea-box'
+          data-testid='textarea-box'
           value={createNewPostState.postContent}
           onChange={(e) => handleClientInput(updateBody, e.target.value)}
         />
       </div>
-      <button type='submit' id="createPostButton">Create Post</button>
+      <button type='submit' id="createPostButton" data-testid='createPostButton'>Create Post</button>
     </form>
   );
 };
