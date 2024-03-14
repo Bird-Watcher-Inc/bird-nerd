@@ -1,17 +1,37 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session');
 const path = require('path');
+var cors = require('cors');
 const { User, Comment, Post } = require('./modelDB');
 
 // const userController = require('./controllers/userController');
 const postController = require('./postController');
+const sessionController = require('./controllers/sessionController');
+
+
 
 const app = express();
 const PORT = 3000;
 
-const authRouter = require('./rotues/auth');
+
+const authRouter = require('./routes/auth');
+
+app.set('trust proxy', 1); 
+app.use(cookieParser()); 
 
 app.use(express.json());
 app.use(express.urlencoded());
+
+app.use(cors({ 
+origin: ['http://localhost:3000', 'http://localhost:8080' ], 
+allowedHeaders: ['Content-Type', 'Authorization'], 
+credentials: true, 
+methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
+exposedHeaders: ["set-cookie"]}));
+
+//{credentials: true, origin: 'http://localhost:8080'}
+
 
 // statically serve everything in the build folder on the route '/build'
 app.use('/build', express.static(path.join(__dirname, '../build')));
@@ -25,23 +45,16 @@ app.get('/', (req, res) => {
 // post req to create username and password; SIGN UP
 // get req to find username and password in db and match it; SIGN IN
 // get req to find username and send it to client;
-app.post('/signup', (req, res) => {
-  const { username, password } = req.body;
-  User.create({username, password})
-    .then((data) => {
-      res.locals = data;
-      return res.status(200).json(res.locals);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-})
 
 // display all posts;
-app.get('/display_all_posts', postController.displayAllPosts, (req,res) => {
+app.get('/display_all_posts', postController.displayAllPosts, (req, res) => {
   res.status(200).json(res.locals.data);
-})
+});
 
+// display posts by user
+app.get('/postsByUser', postController.displayPostsByUser, (req, res) => {
+  res.status(200).json(res.locals.posts);
+});
 
 // post request to /post to create a new post;
 app.post('/newpost', postController.createNewPost, (req, res) => {
@@ -49,7 +62,12 @@ app.post('/newpost', postController.createNewPost, (req, res) => {
 });
 
 // edit the post;
-app.patch('/post', postController.editPost, (req, res) => {
+app.patch('/edit_post', postController.editPost, (req, res) => {
+  return res.status(201).json(res.locals.data);
+});
+
+// delete post;
+app.delete('/delete_post', postController.deletePost, (req, res) => {
   return res.status(201).json(res.locals.data);
 });
 

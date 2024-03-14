@@ -1,25 +1,59 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Post from './Post.jsx';
-// import { refresh } from '../slices/postContainerSlice.js';
-import { useSelector } from 'react-redux';
+import { refresh } from '../slices/postContainerSlice.js';
+import { useSelector, useDispatch } from 'react-redux';
 
 const PostContainer = () => {
+  const dispatch = useDispatch();
   const posts = useSelector((state) => state.postContainer.posts);
+  const [usernameFilter, setUsernameFilter] = useState('');
 
-  const componentsArray = [];
-  posts.forEach((post, i) => {
-    componentsArray.push(
-      <Post
-        key={post._id}
-        user={post.user}
-        textContent={post.textContent}
-        datetime={post.datetime}
-        // TODO: add more props as necessary
-      />
-    );
-  });
+  const getPosts = () => {
+    fetch('http://localhost:3000/display_all_posts', {credentials: 'include'})
+      .then((results) => {
+        return results.json();
+      })
+      .then((json) => {
+        console.log(json);
+        dispatch(refresh(json));
+        setUsernameFilter('');
+      });
+  };
 
-  return <section>{componentsArray}</section>;
+  const handleFilterChange = (e) => {
+    setUsernameFilter(e.target.value);
+  };
+
+  const filterPosts = () => {
+    fetch(`http://localhost:3000/postsByUser?username=${usernameFilter}`)
+      .then((results) => results.json())
+      .then((filteredPosts) => {
+        dispatch(refresh(filteredPosts));
+      })
+      .catch((error) => {
+        console.error('Error fetching filtered posts:', error);
+      });
+  };
+
+  useEffect(() => {
+    getPosts();
+  }, []);
+
+  return (
+    <div className="postContainer">
+      <div className="postUtils">
+          <p>My Feed</p>
+          <div className='utilities'>
+            <input type="text" value={usernameFilter} onChange={handleFilterChange} placeholder="Filter by username" />
+            <button onClick={filterPosts}>Filter</button>
+            <button className="refreshButton" onClick={getPosts}>Refresh</button>
+          </div>
+      </div>
+      {posts.map((post) => (
+        <Post key={post._id} post={post}/>
+      ))}
+    </div>
+  );
 };
 
 export default PostContainer;

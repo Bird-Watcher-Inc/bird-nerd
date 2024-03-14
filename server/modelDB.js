@@ -4,10 +4,9 @@ const bcrypt = require('bcryptjs');
 require('dotenv').config();
 // console.log(process.env.PASSWORD);
 
-const URI = `mongodb+srv://${process.env.USER_NAME}:${process.env.PASSWORD}@cluster0.jbbfxwt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
-
+// const URI = `mongodb+srv://${process.env.USER_NAME}:${process.env.PASSWORD}@cluster0.jbbfxwt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+const URI = `mongodb+srv://${process.env.USER_NAME}:${process.env.PASSWORD}@birdnerditeration.bz6dvto.mongodb.net/?retryWrites=true&w=majority&appName=BirdNerdIteration`;
 console.log(URI);
-
 mongoose
   .connect(URI, {
     // options for the connect method to parse the URI
@@ -46,20 +45,22 @@ const commentSchema = new Schema({
 
 // user schema;
 const postSchema = new Schema({
-  // username: { type: String, required: true },
-  username_id: {
-    type: Schema.Types.ObjectId,
-    ref: 'user',
-  },
-                              
+  username: { type: String, required: true },
+  // username_id: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'user',
+  // },
   // password: { type: String, required: true },
-  textContent: String,
+  postContent: String,
   birdName: String,
-  dateStamp: String,
+  dateStamp: Date,
   location: String,
   weatherConditions: String,
-  comments: [{ type: Schema.Types.ObjectId, ref: 'comment' }]
-});
+  date: String,
+  time: String,
+  comments: [{ type: Schema.Types.ObjectId, ref: 'comment' }],
+}, 
+{timestamps: true});
 
 const User = mongoose.model('user', userSchema);
 const Comment = mongoose.model('comment', commentSchema);

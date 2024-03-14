@@ -4,32 +4,45 @@ const createNewPostSlice = createSlice({
   name: 'createNewPost',
 
   initialState: {
-    body: '',
-    nameOfBird: '',
+    title: '',
+    postContent: '',
+    birdName: '',
     location: '',
-    weather: '',
+    weatherConditions: '',
     date: '',
     time: '',
   },
 
   reducers: {
+    updateTitle: (state, action) => {
+      state.title = action.payload;
+    },
     updateBody: (state, action) => {
-      state.body = action.payload;
+      state.postContent = action.payload;
     },
     updateNameOfBird: (state, action) => {
-      state.updateNameOfBird = action.payload;
+      state.birdName = action.payload;
     },
     updateLocation: (state, action) => {
-      state.updateLocation = action.payload;
+      state.location = action.payload;
     },
     updateWeather: (state, action) => {
-      state.updateWeather = action.payload;
+      state.weatherConditions = action.payload;
     },
     updateDate: (state, action) => {
-      state.updateDate = action.payload;
+      state.date = action.payload;
     },
     updateTime: (state, action) => {
-      state.updateTime = action.payload;
+      state.time = action.payload;
+    },
+    reset: (state, action) => {
+      state.title = '';
+      state.postContent = '';
+      state.birdName = '';
+      state.location = '';
+      state.weatherConditions = '';
+      state.date = '';
+      state.time = '';
     },
   },
 });
@@ -41,6 +54,8 @@ export const {
   updateWeather,
   updateDate,
   updateTime,
+  updateTitle,
+  reset,
 } = createNewPostSlice.actions;
 
 export default createNewPostSlice.reducer;

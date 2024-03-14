@@ -12,24 +12,20 @@ export const postContainerSlice = createSlice({
   },
   reducers: {
     // Refresh the list of all posts
-    refresh: (state) => {
-      // send a get request to the database for a list of all posts
-      async function getPosts() {
-        const response = await fetch('http://localhost:3000/api/posts'); // TODO: replace this endpoint with whatever the server team decides
-        return await response.json();
-      }
-      const posts = getPosts();
+
+    refresh: (state, action) => {
+      const posts = action.payload;
       return { ...state, posts };
     },
     // Select a single post from the container
     select: (state, action) => {
       // get id from payload and store it in state as selected
-      const selected = ({ _id } = action.payload);
+      const selected = action.payload;
       return { ...state, selected };
     },
   },
 });
 
-export const { refresh } = postContainerSlice.actions;
+export const { refresh, select } = postContainerSlice.actions;
 
 export default postContainerSlice.reducer;

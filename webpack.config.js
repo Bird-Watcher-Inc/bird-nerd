@@ -43,4 +43,20 @@ module.exports = {
       directory: path.resolve(__dirname, './build'),
     },
   },
+  resolve: {
+    extensions: ['.js', '.jsx']
+  }
+  // devServer: {
+  //   host: 'localhost',
+  //   port: 8080,
+  //   hot: true, 
+  //   static: {
+  //     directory: path.resolve(__dirname, 'build')
+  //   },
+  //   proxy: [{
+  //     context: ['/api/**'],
+  //     target: 'http://localhost:3000',
+  //   },
+  //   ],
+  // },
 };
